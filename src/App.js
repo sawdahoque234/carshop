@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import AuthProvider from "./context/AuthProvider";
+import Header from "./pages/Header";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import OrderPage from "./pages/OrderPage";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Myorder from "./pages/Dashboard/Myorder";
+import AllCars from "./pages/AllCars";
+import Home from "./pages/Home";
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          {/* <ToastContainer /> */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/allcars" element={<AllCars />} />
+            <Route element={<PrivateRoute />}>
+              {" "}
+              <Route path="/orderpage/:carId" element={<OrderPage />} />{" "}
+            </Route>
+            <Route path="myorder" element={<Myorder />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
