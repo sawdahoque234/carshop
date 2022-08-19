@@ -4,8 +4,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
   updateProfile,
   signOut,
 } from "firebase/auth";
@@ -20,7 +18,6 @@ const useFirebase = () => {
   const [authError, setAuthError] = useState("");
 
   const auth = getAuth();
-  const googleProvider = new GoogleAuthProvider();
 
   const registerUser = (email, password, name, navigate) => {
     setIsLoading(true);
@@ -63,20 +60,6 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const signInWithGoogle = (location, navigate) => {
-    setIsLoading(true);
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        hanldeUserInfo(result.user.email);
-        setAuthError("");
-        const destination = location?.state?.from || "/";
-        navigate(destination);
-      })
-      .catch((error) => {
-        setAuthError(error.message);
-      })
-      .finally(() => setIsLoading(false));
-  };
   const hanldeUserInfo = (email, displayName) => {
     fetch("https://stark-waters-33532.herokuapp.com/users", {
       method: "POST",
@@ -115,7 +98,6 @@ const useFirebase = () => {
     authError,
     registerUser,
     loginUser,
-    signInWithGoogle,
     logout,
   };
 };

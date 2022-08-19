@@ -10,7 +10,7 @@ const Register = () => {
   const [loginData, setLoginData] = useState({});
   const navigate = useNavigate();
 
-  const { user, registerUser, isLoading, authError } = useAuth();
+  const { registerUser } = useAuth();
 
   const handleOnBlur = (e) => {
     const field = e.target.name;

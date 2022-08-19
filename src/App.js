@@ -10,7 +10,6 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import OrderPage from "./pages/OrderPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import Myorder from "./pages/Dashboard/Myorder";
 import AllCars from "./pages/AllCars";
 import Home from "./pages/Home";
@@ -25,7 +24,6 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Header />
-          {/* <ToastContainer /> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

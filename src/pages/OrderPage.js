@@ -13,7 +13,7 @@ const OrderPage = () => {
     fetch(`https://stark-waters-33532.herokuapp.com/cars/${carId}`)
       .then((res) => res.json())
       .then((data) => setCar(data));
-  }, []);
+  }, [carId]);
 
   const onSubmit = (data) => {
     const order = {

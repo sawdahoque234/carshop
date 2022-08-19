@@ -8,7 +8,7 @@ import useAuth from "./../../hooks/useAuth";
 import { useLocation } from "react-router-dom";
 const Login = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, loginUser, isLoading, signInWithGoogle, authError } = useAuth();
+  const { loginUser } = useAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,9 +24,7 @@ const Login = () => {
     loginUser(loginData.email, loginData.password, location, navigate);
     e.preventDefault();
   };
-  const handleGoogleSignIn = () => {
-    signInWithGoogle(location, navigate);
-  };
+
   return (
     <div>
       <div class="relative flex flex-wrap h-full w-full">
